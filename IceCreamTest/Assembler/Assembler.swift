@@ -16,15 +16,19 @@ protocol AssemblerBuilderProtocol {
 
 class AssemblerBuilder: AssemblerBuilderProtocol {
   func createFirstController(router: RouterProtocol) -> UIViewController {
-    let view = FirstViewController()
+    let view = FirstViewController.loadFromNib()
     let presenter = FirstPresenter(view: view, router: router)
     view.presenter = presenter
-    return UIViewController()
+    return view
+  }
+  
+  private func getViewControllerFromXIB(of type: UIViewController.Type) -> UIViewController? {
+    return UIViewController(nibName: String(describing: type), bundle: nil)
   }
   
   func createMainController(data: [DataModel]?, router: RouterProtocol) -> UIViewController {
     //TODO: - code
-    let view = MainViewController()
+    let view = MainViewController.loadFromNib()
     let presenter = MainPresenter(view: view, router: router, data: data)
     view.presenter = presenter
 //    let presenter =

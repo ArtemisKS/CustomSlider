@@ -11,6 +11,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FirstViewController" customModule="IceCreamTest" customModuleProvider="target">
             <connections>
                 <outlet property="chooseButton" destination="rSQ-Zw-c8U" id="2Ez-r6-CfW"/>
+                <outlet property="dataLabel" destination="rnr-PG-1tM" id="jok-OQ-39W"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -19,25 +20,36 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rSQ-Zw-c8U">
-                    <rect key="frame" x="25" y="428" width="364" height="50"/>
-                    <color key="backgroundColor" red="0.0" green="0.64300000000000002" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="50" id="VSA-yq-jQv"/>
-                    </constraints>
-                    <state key="normal" title="Выберите фильтры">
-                        <color key="titleColor" name="SystemWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="buttonTapped:" destination="-1" eventType="touchUpInside" id="KMb-G1-VBa"/>
-                    </connections>
-                </button>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="9aI-BS-0hk">
+                    <rect key="frame" x="16" y="406" width="382" height="94.5"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Нет выбранных данных" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rnr-PG-1tM">
+                            <rect key="frame" x="0.0" y="0.0" width="382" height="20.5"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rSQ-Zw-c8U">
+                            <rect key="frame" x="0.0" y="44.5" width="382" height="50"/>
+                            <color key="backgroundColor" red="0.0" green="0.64300000000000002" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="50" id="VSA-yq-jQv"/>
+                            </constraints>
+                            <state key="normal" title="Выберите фильтры">
+                                <color key="titleColor" name="SystemWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="buttonTapped:" destination="-1" eventType="touchUpInside" id="KMb-G1-VBa"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                </stackView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="rSQ-Zw-c8U" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="25" id="E2L-Rp-Msk"/>
-                <constraint firstItem="rSQ-Zw-c8U" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" id="Ulq-NM-HYV"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="rSQ-Zw-c8U" secondAttribute="trailing" constant="25" id="Y1S-jJ-gMt"/>
+                <constraint firstItem="9aI-BS-0hk" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" id="9tH-KZ-ALB"/>
+                <constraint firstItem="9aI-BS-0hk" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" constant="-32" id="Coy-qu-Kc2"/>
+                <constraint firstItem="9aI-BS-0hk" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="LYZ-Dn-yCi"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="185.50724637681162" y="290.625"/>

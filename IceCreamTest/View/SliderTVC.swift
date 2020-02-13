@@ -13,26 +13,59 @@ import UIKit
   func didTapOnSlider(gesture: UITapGestureRecognizer)
 }
 
+@IBDesignable
+class SliderView: UIView {
+  
+//  private(set) var isGray: Bool!
+//
+//  override func awakeFromNib() {
+//    super.awakeFromNib()
+//
+//    isGray = false
+//  }
+//
+//  func setGray(_ gray: Bool) {
+//    isGray = gray
+//  }
+  
+  func setX(
+    _ x: CGFloat,
+    isLeftButton: Bool) {
+//    if isLeftButton {
+      center.x += x
+//    } else {
+//      frame.size = CGSize(
+//        width: frame.width + x,
+//        height: frame.height)
+//    }
+//    frame.size = CGSize(width: frame.width - x, height: frame.height)
+//    center.x + x
+//    frame.size = CGSize(width: frame.width - x, height: frame.height)
+//    frame = CGRect(
+//    origin: CGPoint(x: frame.origin.x + x, y: frame.origin.y),
+//    size: CGSize(width: frame.width - x, height: frame.height))
+  }
+  
+//  override func draw(_ rect: CGRect) {
+//    super.draw(rect)
+//
+//    let color: UIColor = isGray ?
+//      .lightGray : .mainBlue
+//    color.set()
+//    UIRectFill(rect)
+//  }
+}
+
 class SliderTVC: UITableViewCell {
   
-  @IBOutlet weak var sliderView: UIView!
+  @IBOutlet weak var backSliderView: SliderView!
+  @IBOutlet weak var sliderView: SliderView!
   @IBOutlet weak var leftButton: UIButton!
   @IBOutlet weak var rightButton: UIButton!
   @IBOutlet weak var leftLabel: UILabel!
   @IBOutlet weak var rightLabel: UILabel!
   
   private var delegate: SliderDelegate?
-  
-  override func awakeFromNib() {
-    super.awakeFromNib()
-    // Initialization code
-  }
-  
-  override func setSelected(_ selected: Bool, animated: Bool) {
-    super.setSelected(selected, animated: animated)
-    
-    // Configure the view for the selected state
-  }
   
   func setCell(
     with index: Int,
@@ -44,24 +77,27 @@ class SliderTVC: UITableViewCell {
     
     self.tag = index
     self.delegate = sliderDelegate
-    leftButton.frame.origin = CGPoint(
-      x: leftButtonX,
-      y: leftButton.frame.origin.y)
-    rightButton.frame.origin = CGPoint(
-      x: rightButtonX,
-      y: rightButton.frame.origin.y)
+    leftButton.center.x =  leftButtonX
+    rightButton.center.x = rightButtonX
+    let size = leftButton.frame.width / 2
+    let butX = leftButtonX + size
+    leftButton.frame = CGRect(
+      origin: CGPoint(x: butX, y: leftButton.frame.origin.y),
+      size: CGSize(width: rightButtonX - butX, height: leftButton.frame.height))
     setLabels(leftText: leftText, rightText: rightText)
+    setSliderAction()
+    setButtonsActions()
   }
   
   private func setButtonsActions() {
-    let gesture = UIPanGestureRecognizer(target: self, action: #selector(delegate?.didChangeButtonValue(gesture:)))
-    for case let view? in [leftButton, rightButton] {
-      view.addGestureRecognizer(gesture)
-    }
+    let gesture1 = UIPanGestureRecognizer(target: delegate, action: #selector(delegate?.didChangeButtonValue(gesture:)))
+    let gesture2 = UIPanGestureRecognizer(target: delegate, action: #selector(delegate?.didChangeButtonValue(gesture:)))
+    leftButton.addGestureRecognizer(gesture1)
+    rightButton.addGestureRecognizer(gesture2)
   }
   
   func setSliderAction() {
-    let gesture = UITapGestureRecognizer(target: self, action: #selector(delegate?.didTapOnSlider(gesture:)))
+    let gesture = UITapGestureRecognizer(target: delegate, action: #selector(delegate?.didTapOnSlider(gesture:)))
     sliderView.addGestureRecognizer(gesture)
   }
   

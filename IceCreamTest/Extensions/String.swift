@@ -103,8 +103,12 @@ extension String {
     switch num {
     case 0, 5...9:
       let lastChar = newSelf.remove(at: newSelf.lastIndex)
-      if lastChar != "а" && lastChar != "я" {
+      if lastChar != "а"
+        && lastChar != "я"
+        && lastChar != "ь" {
         newSelf.append("ь")
+      } else if lastChar == "ь" {
+        newSelf.append("ей")
       } else if Globals.Lang.isUA && lastChar == "я" {
         newSelf.append("й")
       }
@@ -153,17 +157,16 @@ extension String {
   }
   
   func getNounOfNumber(
-    _ number: String,
+    _ number: Int,
     andGender gender: NounGender = .masculine) -> String {
-    guard Int(number) != nil else { return self }
     var newSelf = self
     switch gender {
     case .masculine:
-      newSelf = figureOutMasculineEnding(number: number)
+      newSelf = figureOutMasculineEnding(number: "\(number)")
     case .feminine:
-      newSelf = figureOutFeminineEnding(number: number)
+      newSelf = figureOutFeminineEnding(number: "\(number)")
     default:
-      newSelf = figureOutNeutralEnding(number: number)
+      newSelf = figureOutNeutralEnding(number: "\(number)")
     }
     return newSelf
   }

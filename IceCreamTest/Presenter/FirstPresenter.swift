@@ -10,6 +10,7 @@ import Foundation
 
 protocol FirstViewProtocol: class {
   func setupButton(with title: String)
+  func setupDataLabel(with title: String)
 }
 
 protocol FirstViewPresenterProtocol: class {
@@ -28,7 +29,6 @@ class FirstPresenter: FirstViewPresenterProtocol {
   required init(view: FirstViewProtocol, router: RouterProtocol) {
     self.view = view
     self.router = router
-    setupView()
   }
   
   func tapOnData() {
@@ -36,8 +36,23 @@ class FirstPresenter: FirstViewPresenterProtocol {
   }
   
   func setupView() {
+    let labelTitle = confLabelTitle()
     view?.setupButton(with: data != nil
       ? "Изменить фильтры" : "Выбрать фильтры")
+    view?.setupDataLabel(with: labelTitle)
+  }
+  
+  private func confLabelTitle() -> String {
+    if let data = data, data.count == DataConfig.defData.count {
+      return """
+      1. \(data[0].lowerRange - data[0].upperRange)
+      2. \(data[1].lowerRange - data[1].upperRange)
+      3. \(data[2].lowerRange - data[2].upperRange)
+      4. \(data[3].lowerRange - data[3].upperRange)
+      """
+    } else {
+      return "Нет выбранных данных"
+    }
   }
   
 }

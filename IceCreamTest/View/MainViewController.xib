@@ -22,6 +22,10 @@
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="95" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6pX-AX-cN9">
                     <rect key="frame" x="0.0" y="44" width="414" height="752"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="pxV-1U-tYm"/>
+                        <outlet property="delegate" destination="-1" id="nyO-PP-DWc"/>
+                    </connections>
                 </tableView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GfD-MS-q7N">
                     <rect key="frame" x="25" y="821" width="364" height="50"/>

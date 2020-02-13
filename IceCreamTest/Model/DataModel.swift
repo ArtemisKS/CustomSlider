@@ -8,7 +8,9 @@
 
 import Foundation
 
-struct DataModel {
+struct DataModel: CustomStringConvertible {
+  
+  let name = "ночь"
   
   private var lowerRangeVal: Int?
   private var upperRangeVal: Int?
@@ -47,5 +49,35 @@ struct DataModel {
         stepVal = newValue
       }
     }
+  }
+  
+  init(
+    lowerRangeVal: Int,
+    upperRangeVal: Int,
+    stepVal: Int) {
+    
+    self.lowerRangeVal = lowerRangeVal
+    self.upperRangeVal = upperRangeVal
+    self.stepVal = stepVal
+    lowerRange = lowerRangeVal
+    upperRange = upperRangeVal
+  }
+  
+  init(data: DataModel) {
+    self.lowerRangeVal = data.lowerRangeVal
+    self.upperRangeVal = data.upperRangeVal
+    self.stepVal = data.stepVal
+    self.lowerRange = data.lowerRange
+    self.upperRange = data.upperRange
+  }
+  
+  var description: String {
+    return """
+    lowerRangeVal: \(lowerRangeVal!)
+    upperRangeVal: \(upperRangeVal!)
+    stepVal: \(stepVal!)
+    lowerRange: \(lowerRange)
+    upperRange: \(upperRange)
+    """
   }
 }
